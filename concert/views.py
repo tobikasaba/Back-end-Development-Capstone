@@ -94,7 +94,7 @@ def concerts(request):
                 status = concert.attendee.filter(user=user.first().attending)
             except:
                 status = "-"
-            list_of_concerts.append({"concert_details": concert, "status": status})
+            list_of_concerts.append({"concert": concert, "status": status})
         return render(request, "concerts.html", {"concerts": list_of_concerts})
     else:
         return HttpResponseRedirect(reverse("login"))
@@ -110,7 +110,6 @@ def concert_detail(request, id):
         return render(request, "concert_detail.html", {"concert_details": obj, "status": status, "attending_choices": ConcertAttending.AttendingChoices.choices})
     else:
         return HttpResponseRedirect(reverse("login"))
-    pass
 
 
 def concert_attendee(request):
